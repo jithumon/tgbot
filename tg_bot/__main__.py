@@ -19,10 +19,9 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
 
-ഹായ് {}, എന്റെ പേര് {}! ഞാൻ ഇദ്ദേഹം നോക്കി നടത്തുന്ന ഒരു അടിപൊളി അഡ്മിൻ ബോട്ടാണ്
+ഹായ് {}, എന്റെ പേര് {}! ഞാൻ [ഇദ്ദേഹം](tg://user?id={}) നോക്കി നടത്തുന്ന ഒരു അടിപൊളി അഡ്മിൻ ബോട്ടാണ്.
 
-I'm built in python3, using the python-telegram-bot library, and am fully opensource - you can find what makes me tick \
-[here](github.com/PaulSonOfLars/tgbot)!
+എന്നെ നിർമ്മിച്ചിരിക്കുന്നത് python3 യിൽ python-telegram-bot ലൈബ്രറി ഉപയോഗിച്ചാണ്. ഞാൻ പൂർണ്ണമായിട്ടും ഓപ്പൺസോഴ്സ്ഡ് ആണ്. എന്റെ കോഡ് നിങ്ങൾക്ക് [ഇവിടെ](https://github.com/jithumon/tgbot) കാണുവാൻ സാധിക്കും.
 
 എന്റെ അപ്ഡേറ്റുകളെക്കുറിച്ചും പ്രവർത്തനത്തെപറ്റിയും അറിയുവാൻ [ഈ ചാനൽ](t.me/kochu_updates) സബ്സ്ക്രൈബ് ചെയ്യാൻ മറക്കേണ്ട.
 
