@@ -3,10 +3,7 @@ from typing import Optional, List
 
 from telegram import Message, Chat, Update, Bot, ParseMode, User, MessageEntity
 from telegram import TelegramError
-<<<<<<< HEAD
-=======
 from telegram.error import BadRequest
->>>>>>> 3d5c1f4b32706535115024c85ffb1a22655fa075
 from telegram.ext import CommandHandler, MessageHandler, Filters
 from telegram.ext.dispatcher import run_async
 from telegram.utils.helpers import mention_html
