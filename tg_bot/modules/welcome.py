@@ -133,8 +133,6 @@ def new_member(bot: Bot, update: Update):
         if prev_welc:
             try:
                 bot.delete_message(chat.id, prev_welc)
-                # try deleting the service message
-                bot.delete_message(chat.id, update.message.message_id)
             except BadRequest as excp:
                 pass
 
