@@ -422,8 +422,9 @@ __help__ = """
  - /time <place>: gives the local time at the given place.
  - /info: get information about a user.
  - /gdpr: deletes your information from the bot's database. Private chats only.
-
  - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
+ - /stickerid: reply to a sticker and get sticker id of that.
+ - /getsticker: reply to a sticker and get that sticker as .png and image. 
 """
 
 __mod_name__ = "Misc"
