@@ -83,21 +83,25 @@ def get(bot, update, notename, show_none=True, no_format=False):
             keyb = []
             parseMode = ParseMode.MARKDOWN
             buttons = sql.get_buttons(chat_id, notename)
+            should_preview_disabled = True
             if no_format:
                 parseMode = None
                 text += revert_buttons(buttons)
             else:
                 keyb = build_keyboard(buttons)
+                if "telegra.ph" in text or "youtu.be" in text:
+                    should_preview_disabled = False
 
             keyboard = InlineKeyboardMarkup(keyb)
 
             try:
                 if note.msgtype in (sql.Types.BUTTON_TEXT, sql.Types.TEXT):
-                    bot.send_message(update.effective_chat.id, text, reply_to_message_id=reply_id,
+
+                    bot.send_message(chat_id, text, reply_to_message_id=reply_id,
                                      parse_mode=parseMode, disable_web_page_preview=should_preview_disabled,
                                      reply_markup=keyboard)
                 else:
-                    ENUM_FUNC_MAP[note.msgtype](update.effective_chat.id, note.file, caption=text, reply_to_message_id=reply_id,
+                    ENUM_FUNC_MAP[note.msgtype](chat_id, note.file, caption=text, reply_to_message_id=reply_id,
                                                 parse_mode=parseMode, disable_web_page_preview=should_preview_disabled,
                                                 reply_markup=keyboard)
 
