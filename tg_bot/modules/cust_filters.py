@@ -217,7 +217,9 @@ def reply_filter(bot: Bot, update: Update):
             elif filt.has_markdown:
                 keyb = build_keyboard(buttons)
                 keyboard = InlineKeyboardMarkup(keyb)
-
+                should_preview_disabled = True
+                if "telegra.ph" in filt.reply or "youtu.be" in filt.reply:
+                    should_preview_disabled = False
                 try:
                     message.reply_text(filt.reply, parse_mode=ParseMode.MARKDOWN,
                                        disable_web_page_preview=True,
