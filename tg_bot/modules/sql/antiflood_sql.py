@@ -1,13 +1,9 @@
 import threading
 
-<<<<<<< HEAD
-from sqlalchemy import String, Column, Integer
 
-from tg_bot.modules.sql import SESSION, BASE
-=======
 from sqlalchemy import Column, Integer, String
 from tg_bot.modules.sql import BASE, SESSION
->>>>>>> d9008bc... another flood fix
+
 
 DEF_COUNT = 0
 DEF_LIMIT = 0
