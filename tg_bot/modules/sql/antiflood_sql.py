@@ -1,12 +1,18 @@
 import threading
 
+<<<<<<< HEAD
 from sqlalchemy import String, Column, Integer
 
 from tg_bot.modules.sql import SESSION, BASE
+=======
+from sqlalchemy import Column, Integer, String
+from tg_bot.modules.sql import BASE, SESSION
+>>>>>>> d9008bc... another flood fix
 
 DEF_COUNT = 0
 DEF_LIMIT = 0
 DEF_OBJ = (None, DEF_COUNT, DEF_LIMIT)
+
 
 class FloodControl(BASE):
     __tablename__ = "antiflood"
@@ -51,11 +57,11 @@ def update_flood(chat_id: str, user_id) -> bool:
         if limit == 0:  # no antiflood
             return False
 
-        count += 1
         if user_id != curr_user_id or user_id is None:  # other user
-            CHAT_FLOOD[str(chat_id)] = (user_id, count, limit)
+            CHAT_FLOOD[str(chat_id)] = (user_id, DEF_COUNT + 1, limit)
             return False
 
+        count += 1
         if count > limit:  # too many msgs, kick
             CHAT_FLOOD[str(chat_id)] = (None, DEF_COUNT, limit)
             return True
