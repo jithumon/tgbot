@@ -193,6 +193,10 @@ def reply_filter(bot: Bot, update: Update):
     if not to_match:
         return
 
+    if message.reply_to_message:
+        message = message.reply_to_message
+
+
     chat_filters = sql.get_chat_triggers(chat.id)
     for keyword in chat_filters:
         pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
