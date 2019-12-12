@@ -40,7 +40,7 @@ def list_handlers(bot: Bot, update: Update):
             filter_list = "*local filters:*\n"
         else:
             chat_name = chat.title
-            filter_list = "*Filters in {}*:\n"
+            filter_list = "*Filters in {}*:\n".format(chat_name)
 
 
     all_handlers = sql.get_chat_triggers(chat_id)
