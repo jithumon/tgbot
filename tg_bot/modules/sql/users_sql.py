@@ -184,3 +184,13 @@ def del_user(user_id):
         SESSION.commit()
         SESSION.close()
     return False
+
+def rem_chat(chat_id):
+    with INSERTION_LOCK:
+        chat = SESSION.query(Chats).get(str(chat_id))
+        if chat:
+            SESSION.delete(chat)
+            SESSION.commit()
+        else:
+            SESSION.close()
+
