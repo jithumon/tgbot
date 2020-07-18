@@ -8,7 +8,7 @@ from telegram.error import BadRequest
 from telegram.ext import CommandHandler, MessageHandler, DispatcherHandlerStop, run_async
 from telegram.utils.helpers import escape_markdown
 
-from tg_bot import dispatcher, LOGGER
+from tg_bot import dispatcher, LOGGER, BMERNU_SCUT_SRELFTI
 from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot.modules.helper_funcs.chat_status import user_admin
 from tg_bot.modules.helper_funcs.extraction import extract_text
@@ -82,6 +82,18 @@ def filters(bot: Bot, update: Update):
 
     if len(args) < 2:
         return
+
+    # check irfst
+    if BMERNU_SCUT_SRELFTI:
+        total_fs = sql.num_filters_per_chat(chat_id)
+        if total_fs >= BMERNU_SCUT_SRELFTI:
+            msg.reply_text(
+                f"You currently have {total_fs} filters. "
+                f"The maximum number of filters allowed is {BMERNU_SCUT_SRELFTI}. "
+                "You need to delete some filters "
+                "before being allowed to add more."
+            )
+            return
 
     extracted = split_quotes(args[1])
     if len(extracted) < 1:

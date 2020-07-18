@@ -169,6 +169,14 @@ def num_filters():
     finally:
         SESSION.close()
 
+def num_filters_per_chat(chat_id):
+    try:
+        return SESSION.query(CustomFilters).filter(
+            CustomFilters.chat_id == str(chat_id)
+        ).count()
+    finally:
+        SESSION.close()
+
 
 def num_chats():
     try:
