@@ -10,14 +10,16 @@ Kochu and I are moderating a [support group](https://t.me/Keralabots), where you
 bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. Of course
 I'll also help when a database schema changes, and some table column needs to be modified/added. Note to maintainers that all schema changes will be found in the commit messages, and its their responsibility to read any new commits.
 
-Join the [news channel](https://t.me/Kochu_Updates) if you just want to stay in the loop about new features or
+Join the [news channel](https://t.me/KochuUpdates) if you just want to stay in the loop about new features or
 announcements.
 
 Alternatively, [find me on telegram](https://t.me/jithumon)! (Keep all support questions in the support chat, where more people can help you.)
 
+To deploy me on heroku, use below button:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jithumon/tgbot)
 
+There is also a [tutorial video](https://youtu.be/W6CLKrehy6w) if you want any help on creating heroku clone.
 
 ## Starting the bot.
 
@@ -74,6 +76,7 @@ The following env variables are supported:
  - `WEBHOOK`: Setting this to ANYTHING will enable webhooks when in env mode
  messages
  - `URL`: The URL your webhook should connect to (only needed for webhook mode)
+ - `BMERNU_SCUT_SRELFTI`: No. of custom filters which can be set in each group
 
  - `SUDO_USERS`: A space separated list of user_ids which should be considered sudo users
  - `SUPPORT_USERS`: A space separated list of user_ids which should be considered support users (can gban/ungban,
