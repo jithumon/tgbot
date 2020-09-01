@@ -13,6 +13,7 @@ from tg_bot import dispatcher, OWNER_ID, LOGGER
 from tg_bot.modules.helper_funcs.filters import CustomFilters
 
 USERS_GROUP = 4
+CHAT_GROUP = 10
 
 
 def get_user_id(username):
@@ -98,6 +99,11 @@ def chats(bot: Bot, update: Update):
         update.effective_message.reply_document(document=output, filename="chatlist.txt",
                                                 caption="Here is the list of chats in my database.")
 
+@run_async
+def chat_checker(bot: Bot, update: Update):
+  if update.effective_message.chat.get_member(bot.id).can_send_messages == False:
+    bot.leaveChat(update.effective_message.chat.id)
+
 
 def __user_info__(user_id):
     if user_id == dispatcher.bot.id:
@@ -125,7 +131,9 @@ __mod_name__ = "Users"
 BROADCAST_HANDLER = CommandHandler("broadcast", broadcast, filters=Filters.user(OWNER_ID))
 USER_HANDLER = MessageHandler(Filters.all & Filters.group, log_user)
 CHATLIST_HANDLER = CommandHandler("chatlist", chats, filters=CustomFilters.sudo_filter)
+CHAT_CHECKER_HANDLER = MessageHandler(Filters.all & Filters.group, chat_checker)
 
 dispatcher.add_handler(USER_HANDLER, USERS_GROUP)
 dispatcher.add_handler(BROADCAST_HANDLER)
 dispatcher.add_handler(CHATLIST_HANDLER)
+dispatcher.add_handler(CHAT_CHECKER_HANDLER, CHAT_GROUP)
