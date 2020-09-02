@@ -19,7 +19,7 @@ from tg_bot.modules.sql import cust_filters_sql as sql
 
 from tg_bot.modules.connection import connected
 
-HANDLER_GROUP = 10
+HANDLER_GROUP = 15
 BASIC_FILTER_STRING = "*Filters in this chat:*\n"
 
 
