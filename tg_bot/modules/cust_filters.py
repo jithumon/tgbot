@@ -91,7 +91,8 @@ def filters(bot: Bot, update: Update):
                 f"You currently have {total_fs} filters. "
                 f"The maximum number of filters allowed is {BMERNU_SCUT_SRELFTI}. "
                 "You need to delete some filters "
-                "before being allowed to add more."
+                "before being allowed to add more "
+                "or use @kochufilterbot for unlimited filters."
             )
             return
 
