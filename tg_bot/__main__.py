@@ -377,8 +377,7 @@ def donate(bot: Bot, update: Update):
 
         if OWNER_ID != 254318997 and DONATION_LINK:
             update.effective_message.reply_text("You are irritating Don't donate!!! "
-                                                "Report bugs to: [Him](t.me/lolboyisback)
-                                                parse_mode=ParseMode.MARKDOWN)
+                                   
 
     else:
         try:
