@@ -108,6 +108,8 @@ def filters(bot: Bot, update: Update):
     is_voice = False
     is_audio = False
     is_video = False
+    media_caption = None
+    has_caption = False
     buttons = []
 
     # determine what the contents of the filter are - text, image, sticker, etc
@@ -122,28 +124,39 @@ def filters(bot: Bot, update: Update):
     elif msg.reply_to_message and msg.reply_to_message.sticker:
         content = msg.reply_to_message.sticker.file_id
         is_sticker = True
+        # stickers don't have caption in BOT API -_-
 
     elif msg.reply_to_message and msg.reply_to_message.document:
         content = msg.reply_to_message.document.file_id
         is_document = True
+        media_caption = msg.reply_to_message.caption
+        has_caption = True
 
     elif msg.reply_to_message and msg.reply_to_message.photo:
         offset = len(msg.reply_to_message.caption)
         ignore_underscore_case, buttons = button_markdown_parser(msg.reply_to_message.caption, entities=msg.reply_to_message.parse_entities(), offset=offset)
         content = msg.reply_to_message.photo[-1].file_id  # last elem = best quality
         is_image = True
+        media_caption = msg.reply_to_message.caption
+        has_caption = True
 
     elif msg.reply_to_message and msg.reply_to_message.audio:
         content = msg.reply_to_message.audio.file_id
         is_audio = True
+        media_caption = msg.reply_to_message.caption
+        has_caption = True
 
     elif msg.reply_to_message and msg.reply_to_message.voice:
         content = msg.reply_to_message.voice.file_id
         is_voice = True
+        media_caption = msg.reply_to_message.caption
+        has_caption = True
 
     elif msg.reply_to_message and msg.reply_to_message.video:
         content = msg.reply_to_message.video.file_id
         is_video = True
+        media_caption = msg.reply_to_message.caption
+        has_caption = True
 
     else:
         msg.reply_text("You didn't specify what to reply with!")
@@ -156,7 +169,7 @@ def filters(bot: Bot, update: Update):
             dispatcher.remove_handler(handler, HANDLER_GROUP)
 
     sql.add_filter(chat_id, keyword, content, is_sticker, is_document, is_image, is_audio, is_voice, is_video,
-                   buttons)
+                   buttons, media_caption, has_caption)
 
     msg.reply_text("Handler '{}' added in *{}*!".format(keyword, chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
     raise DispatcherHandlerStop
