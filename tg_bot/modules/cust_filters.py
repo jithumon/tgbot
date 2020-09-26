@@ -232,21 +232,24 @@ def reply_filter(bot: Bot, update: Update):
         if re.search(pattern, to_match, flags=re.IGNORECASE):
             filt = sql.get_filter(chat.id, keyword)
             buttons = sql.get_buttons(chat.id, filt.keyword)
-            if len(buttons) > 0:
-                keyb = build_keyboard(buttons)
-                keyboard = InlineKeyboardMarkup(keyb)
+            media_caption = filt.caption if filt.caption is not None else ""
             if filt.is_sticker:
                 message.reply_sticker(filt.reply)
             elif filt.is_document:
-                message.reply_document(filt.reply)
+                message.reply_document(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN)
             elif filt.is_image:
-                message.reply_photo(filt.reply, reply_markup=keyboard)
+                if len(buttons) > 0:
+                    keyb = build_keyboard(buttons)
+                    keyboard = InlineKeyboardMarkup(keyb)
+                    message.reply_photo(filt.reply, caption=media_caption, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN)
+                else:
+                    message.reply_photo(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN)
             elif filt.is_audio:
-                message.reply_audio(filt.reply)
+                message.reply_audio(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN)
             elif filt.is_voice:
-                message.reply_voice(filt.reply)
+                message.reply_voice(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN)
             elif filt.is_video:
-                message.reply_video(filt.reply)
+                message.reply_video(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN)
             elif filt.has_markdown:
                 keyb = build_keyboard(buttons)
                 keyboard = InlineKeyboardMarkup(keyb)

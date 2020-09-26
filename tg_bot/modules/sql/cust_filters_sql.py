@@ -100,8 +100,9 @@ def add_filter(chat_id, keyword, reply, is_sticker=False, is_document=False, is_
 
         filt = CustomFilters(str(chat_id), keyword, reply, is_sticker, is_document, is_image, is_audio, is_voice,
                              is_video, bool(buttons))
-        if filt.has_caption:
+        if has_caption:
             filt.caption = caption
+            filt.has_caption = has_caption
 
         if keyword not in CHAT_FILTERS.get(str(chat_id), []):
             CHAT_FILTERS[str(chat_id)] = sorted(CHAT_FILTERS.get(str(chat_id), []) + [keyword],
