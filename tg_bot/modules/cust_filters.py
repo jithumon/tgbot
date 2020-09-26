@@ -127,35 +127,38 @@ def filters(bot: Bot, update: Update):
         # stickers don't have caption in BOT API -_-
 
     elif msg.reply_to_message and msg.reply_to_message.document:
+        offset = len(msg.reply_to_message.caption)
+        media_caption, buttons = button_markdown_parser(msg.reply_to_message.caption, entities=msg.reply_to_message.parse_entities(), offset=offset)
         content = msg.reply_to_message.document.file_id
         is_document = True
-        media_caption = msg.reply_to_message.caption
         has_caption = True
 
     elif msg.reply_to_message and msg.reply_to_message.photo:
         offset = len(msg.reply_to_message.caption)
-        ignore_underscore_case, buttons = button_markdown_parser(msg.reply_to_message.caption, entities=msg.reply_to_message.parse_entities(), offset=offset)
+        media_caption, buttons = button_markdown_parser(msg.reply_to_message.caption, entities=msg.reply_to_message.parse_entities(), offset=offset)
         content = msg.reply_to_message.photo[-1].file_id  # last elem = best quality
         is_image = True
-        media_caption = msg.reply_to_message.caption
         has_caption = True
 
     elif msg.reply_to_message and msg.reply_to_message.audio:
+        offset = len(msg.reply_to_message.caption)
+        media_caption, buttons = button_markdown_parser(msg.reply_to_message.caption, entities=msg.reply_to_message.parse_entities(), offset=offset)
         content = msg.reply_to_message.audio.file_id
         is_audio = True
-        media_caption = msg.reply_to_message.caption
         has_caption = True
 
     elif msg.reply_to_message and msg.reply_to_message.voice:
+        offset = len(msg.reply_to_message.caption)
+        media_caption, buttons = button_markdown_parser(msg.reply_to_message.caption, entities=msg.reply_to_message.parse_entities(), offset=offset)
         content = msg.reply_to_message.voice.file_id
         is_voice = True
-        media_caption = msg.reply_to_message.caption
         has_caption = True
 
     elif msg.reply_to_message and msg.reply_to_message.video:
+        offset = len(msg.reply_to_message.caption)
+        media_caption, buttons = button_markdown_parser(msg.reply_to_message.caption, entities=msg.reply_to_message.parse_entities(), offset=offset)
         content = msg.reply_to_message.video.file_id
         is_video = True
-        media_caption = msg.reply_to_message.caption
         has_caption = True
 
     else:
