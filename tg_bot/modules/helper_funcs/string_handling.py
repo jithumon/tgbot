@@ -145,6 +145,8 @@ def button_markdown_parser(txt: str, entities: Dict[MessageEntity, str] = None, 
 
 
 def escape_invalid_curly_brackets(text: str, valids: List[str]) -> str:
+    if not text:
+        return text
     new_text = ""
     idx = 0
     while idx < len(text):
