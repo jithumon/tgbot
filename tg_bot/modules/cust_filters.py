@@ -112,6 +112,7 @@ def filters(bot: Bot, update: Update):
     is_video = False
     media_caption = None
     has_caption = False
+    content = None # :\
     buttons = []
 
     # determine what the contents of the filter are - text, image, sticker, etc
@@ -119,11 +120,9 @@ def filters(bot: Bot, update: Update):
         offset = len(extracted[1]) - len(msg.text)  # set correct offset relative to command + notename
         content, buttons = button_markdown_parser(extracted[1], entities=msg.parse_entities(), offset=offset)
         content = content.strip()
-        if not content:
-            msg.reply_text("There is no note message - You can't JUST have buttons, you need a message to go with it!")
-            return
+        # https://t.me/c/1279877202/3508
 
-    elif msg.reply_to_message and msg.reply_to_message.sticker:
+    if msg.reply_to_message and msg.reply_to_message.sticker:
         content = msg.reply_to_message.sticker.file_id
         is_sticker = True
         # stickers don't have caption in BOT API -_-
@@ -163,8 +162,12 @@ def filters(bot: Bot, update: Update):
         is_video = True
         has_caption = True
 
-    else:
-        msg.reply_text("You didn't specify what to reply with!")
+    elif msg.reply_to_message and msg.reply_to_message.text:
+        content = msg.reply_to_message.text
+
+    elif not content:
+        # msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("There is no note message - You can't JUST have buttons, you need a message to go with it!")
         return
 
     # Add the filter
