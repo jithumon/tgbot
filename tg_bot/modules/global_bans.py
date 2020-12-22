@@ -94,8 +94,8 @@ def gban(bot: Bot, update: Update, args: List[str]):
                      "\n<b>ID:</b> <code>{}</code>" \
                      "\n<b>Previous Reason:</b> {}" \
                      "\n<b>Amended Reason:</b> {}".format(mention_html(banner.id, banner.first_name),
-                                              mention_html(user_chat.id, user_chat.first_name or "Deleted Account"),  
-                                                           user_chat.id, old_reason, new_reason), 
+                                              mention_html(user_chat.id, user_chat.first_name or "Deleted Account"),
+                                                           user_chat.id, old_reason, reason),
                     html=True)
 
             message.reply_text("This user is already gbanned, for the following reason:\n"
@@ -111,9 +111,9 @@ def gban(bot: Bot, update: Update, args: List[str]):
                      "\n<b>Admin:</b> {}" \
                      "\n<b>User:</b> {}" \
                      "\n<b>ID:</b> <code>{}</code>" \
-                     "\n<b>New Reason:</b> {}".format(mention_html(banner.id, banner.first_name or "Deleted Account"), 
-                                              mention_html(user_chat.id, user_chat.first_name), 
-                                                           user_chat.id, new_reason), 
+                     "\n<b>New Reason:</b> {}".format(mention_html(banner.id, banner.first_name or "Deleted Account"),
+                                              mention_html(user_chat.id, user_chat.first_name),
+                                                           user_chat.id, reason),
                     html=True)
             message.reply_text("This user is already gbanned, but had no reason set; I've gone and updated it!")
 
