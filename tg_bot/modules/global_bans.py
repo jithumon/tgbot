@@ -119,7 +119,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
         return
 
-    starting = "Initiating global ban for {}...".format(mention_html(user_chat.id, user_chat.first_name or "Deleted Account"))
+    starting = "Global Ban initiated for: \nUser: {}\nReason: {}".format(mention_html(user_chat.id, user_chat.first_name or "Deleted Account"), reason)
     keyboard = []
     message.reply_text(starting, reply_markup=keyboard, parse_mode=ParseMode.HTML)
 
@@ -159,7 +159,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         except TelegramError:
             pass
 
-    gban_complete="{} has been successfully gbanned :)".format(mention_html(user_chat.id, user_chat.first_name or "Deleted Account"))
+    gban_complete="{} has been successfully gbanned :)\nReason: {}".format(mention_html(user_chat.id, user_chat.first_name or "Deleted Account"), reason)
     keyboard = []
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
                    "{} has been successfully gbanned :)".format(mention_html(user_chat.id, user_chat.first_name or "Deleted Account")),
