@@ -2,13 +2,13 @@ import re
 from typing import Optional
 
 import telegram
-from telegram import ParseMode, InlineKeyboardMarkup, Message, Chat
+from telegram import ParseMode, InlineKeyboardMarkup, Message, Chat, InlineKeyboardButton
 from telegram import Update, Bot
 from telegram.error import BadRequest
-from telegram.ext import CommandHandler, MessageHandler, DispatcherHandlerStop, run_async, Filters
+from telegram.ext import CommandHandler, MessageHandler, DispatcherHandlerStop, run_async, Filters, CallbackQueryHandler
 from telegram.utils.helpers import escape_markdown
 
-from tg_bot import dispatcher, LOGGER, BMERNU_SCUT_SRELFTI
+from tg_bot import dispatcher, LOGGER, BMERNU_SCUT_SRELFTI, SUDO_USERS
 from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot.modules.helper_funcs.chat_status import user_admin
 from tg_bot.modules.helper_funcs.extraction import extract_text
@@ -286,34 +286,61 @@ def reply_filter(bot: Bot, update: Update):
             break
 
 @run_async
-@user_admin
 def rmall_filters(bot: Bot, update: Update):
     chat = update.effective_chat
     user = update.effective_user
+    member = chat.get_member(user.id)
+    if member.status != "creator" and user.id not in SUDO_USERS:
+        update.effective_message.reply_text(
+            "Only the chat owner can clear all notes at once.")
+    else:
+        buttons = InlineKeyboardMarkup([[InlineKeyboardButton(text="Stop all filters", callback_data="filters_rmall")], [
+                                       InlineKeyboardButton(text="Cancel", callback_data="filters_cancel")]])
+        update.effective_message.reply_text(
+            f"Are you sure you would like to stop ALL filters in {chat.title}? This action cannot be undone.", reply_markup=buttons, parse_mode=ParseMode.MARKDOWN)
+
+
+@run_async
+def rmall_callback(bot: Bot, update: Update):
+    query = update.callback_query
+    chat = update.effective_chat
     msg = update.effective_message
+    member = chat.get_member(query.from_user.id)
+    if query.data == 'filters_rmall':
+        if member.status == "creator" or query.from_user.id in SUDO_USERS:
+            allfilters = sql.get_chat_triggers(chat.id)
+            if not allfilters:
+                msg.edit_text("No filters in this chat, nothing to stop!")
+                return
 
-    usermem = chat.get_member(user.id)
-    if not usermem.status == "creator":
-        msg.reply_text("This command can be only used by chat OWNER!")
-        return
+            count = 0
+            filterlist = []
+            for x in allfilters:
+                count += 1
+                filterlist.append(x)
 
-    allfilters = sql.get_chat_triggers(chat.id)
+            for i in filterlist:
+                sql.remove_filter(chat.id, i)
 
-    if not allfilters:
-        msg.reply_text("No filters in this chat, nothing to stop!")
-        return
+            msg.edit_text(f"Cleaned {count} filters in {chat.title}")
 
-    count = 0
-    filterlist = []
-    for x in allfilters:
-        count += 1
-        filterlist.append(x)
+        if member.status == "administrator":
+            query.answer(
+                "Only owner of the chat can do this.")
 
-    for i in filterlist:
-        sql.remove_filter(chat.id, i)
-
-    return msg.reply_text(f"Cleaned {count} filters in {chat.title}")
-
+        if member.status == "member":
+            query.answer(
+                "You need to be admin to do this.")
+    elif query.data == 'filters_cancel':
+        if member.status == "creator" or query.from_user.id in SUDO_USERS:
+            msg.edit_text("Clearing of all filters has been cancelled.")
+            return
+        if member.status == "administrator":
+            query.answer(
+                "Only owner of the chat can do this.")
+        if member.status == "member":
+            query.answer(
+                "You need to be admin to do this.")
 
 
 def __stats__():
@@ -339,7 +366,7 @@ keywords are in lowercase. If you want your keyword to be a sentence, use quotes
 doin?
  - /stop <filter keyword>: stop that filter.
 *Chat creator only:*
- - /rmallfilter: Stop all chat filters at once.
+ - /removeallfilters: Stop all filters in chat at once (Limited to creators only).
 
 """
 
@@ -347,12 +374,14 @@ __mod_name__ = "Filters"
 
 FILTER_HANDLER = CommandHandler("filter", filters)
 STOP_HANDLER = CommandHandler("stop", stop_filter)
-RMALLFILTER_HANDLER = CommandHandler("rmallfilter", rmall_filters, filters=Filters.group)
+RMALLFILTER_HANDLER = CommandHandler("removeallfilters", rmall_filters, filters=Filters.group)
+RMALLFILTER_CALLBACK = CallbackQueryHandler(rmall_callback, pattern=r"filters_.*")
 LIST_HANDLER = DisableAbleCommandHandler("filters", list_handlers, admin_ok=True)
 CUST_FILTER_HANDLER = MessageHandler(CustomFilters.has_text, reply_filter)
 
 dispatcher.add_handler(FILTER_HANDLER)
 dispatcher.add_handler(STOP_HANDLER)
 dispatcher.add_handler(RMALLFILTER_HANDLER)
+dispatcher.add_handler(RMALLFILTER_CALLBACK)
 dispatcher.add_handler(LIST_HANDLER)
 dispatcher.add_handler(CUST_FILTER_HANDLER, HANDLER_GROUP)
