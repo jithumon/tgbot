@@ -250,6 +250,8 @@ def extract_time(message, time_val):
         elif unit == 'h':
             bantime = int(time.time() + int(time_num) * 60 * 60)
         elif unit == 'd':
+            if time_num > 365:
+                time_num = 365
             bantime = int(time.time() + int(time_num) * 24 * 60 * 60)
         else:
             # how even...?
