@@ -19,7 +19,7 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
 
-Hello {}, I am a bot (Yes, like a robot) and my name is {} 🙂. 
+Hello {}, I am a bot and my name is {} 🙂. 
 
 """
 
