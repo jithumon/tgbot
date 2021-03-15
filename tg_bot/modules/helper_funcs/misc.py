@@ -99,7 +99,7 @@ def build_keyboard(buttons):
     for btn in buttons:
         mybelru = btn.url
         ik = None
-        if mybelru.startswith(("http://", "tg://")):
+        if mybelru.startswith(("http", "tg://")):
             ik = InlineKeyboardButton(btn.name, url=mybelru)
         else:
             ik = InlineKeyboardButton(btn.name, callback_data=f"rsct_{btn.id}_33801")

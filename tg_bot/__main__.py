@@ -423,13 +423,16 @@ def kcfrsct_fnc(bot: Bot, update: Update):
     user = update.effective_user
     _match = re.match(r"rsct_(.*)_33801", query.data)
     # ensure no spinny white circle
-    bot.answer_callback_query(query.id)
     if _match:
         try:
-            _soqka = sql.get_btn_with_di(int(_match.group(1)))
-            print(_soqka.url)
+            from tg_bot.modules.sql.cust_filters_sql import get_btn_with_di
+            _soqka = get_btn_with_di(int(_match.group(1)))
+            query.answer(
+                text=_soqka.url,
+                show_alert=True
+            )
         except:
-            pass
+            bot.answer_callback_query(query.id)
 
 
 def main():
