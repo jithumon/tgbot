@@ -161,6 +161,10 @@ def new_member(bot: Bot, update: Update):
                         username = mention
 
                     valid_format = escape_invalid_curly_brackets(cust_welcome, VALID_WELCOME_FORMATTERS)
+
+                    if not valid_format:
+                        return
+
                     res = valid_format.format(first=escape_markdown(first_name),
                                               last=escape_markdown(new_mem.last_name or first_name),
                                               fullname=escape_markdown(fullname), username=username, mention=mention,
