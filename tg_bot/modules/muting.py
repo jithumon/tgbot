@@ -164,7 +164,7 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
             message.reply_text("This user is already muted.")
 
     except BadRequest as excp:
-        if excp.message == "Reply message not found":
+        if excp.message == "Replied message not found":
             # Do not reply
             message.reply_text("Muted for {}!".format(time_val), quote=False)
             return log

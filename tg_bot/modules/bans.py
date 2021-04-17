@@ -96,9 +96,13 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
         return log
 
     except BadRequest as excp:
-        if excp.message == "Reply message not found":
+        if excp.message == "Replied message not found":
+            chat_id = update.effective_chat.id
+            message = update.effective_message
             # Do not reply
-            message.reply_text('Banned!', quote=False)
+            reply = "{} ന് ബണ്ണ് കൊടുത്തു വിട്ടിട്ടുണ്ട് !".format(mention_html(member.user.id, member.user.first_name))
+            bot.send_message(chat_id, reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
+#           message.reply_text('Banned!', quote=False)
             return log
         else:
             LOGGER.warning(update)
