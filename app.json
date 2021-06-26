@@ -1,7 +1,7 @@
 {
-  "name": "Kochubot",
+  "name": "admimbotv2",
   "description": "Telegram's sassiest group manager. Modular Telegram group management bot!",
-  "logo": "https://telegra.ph/file/1925c7a2f601539ccde7a.png",
+  "logo": "https://telegra.ph/MOVIE-HOUSE-ENTERTAINM",
   "keywords": [
     "telegram",
     "best",
@@ -12,7 +12,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/jithumon/tgbot",
+  "repository": "https://github.com/culprit-k/adminbotv2",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable env variables. But, you need to understand the code to know what to set here!",
@@ -23,11 +23,11 @@
     },
     "OWNER_ID": {
       "description": "An integer of consisting of your owner ID",
-      "value": "20516707"
+      "value": "1063909368"
     },
     "OWNER_USERNAME": {
       "description": "Your username",
-      "value": "SonOfLars"
+      "value": "abhijith876"
     },
     "WEBHOOK": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode messages",
@@ -42,19 +42,19 @@
     },
     "SUDO_USERS": {
       "description": "A space separated list of user_ids which should be considered sudo users",
-      "value": "254318997 18673980 83489514"
+      "value": "1063909368"
     },
     "SUPPORT_USERS": {
       "description": "A space separated list of user_ids which should be considered support users (can gban/ungban, nothing else)",
-      "value": "254318997 18673980 83489514"
+      "value": "1063909368"
     },
     "WHITELIST_USERS": {
       "description": "A space separated list of user_ids which should be considered whitelisted - they can't be banned.",
-      "value": "254318997 18673980 83489514"
+      "value": "1063909368"
     },
     "DONATION_LINK": {
       "description": "Optional: link where you would like to receive donations.",
-      "value": "https://www.paypal.me/PaulSonOfLars"
+      "value": "https://t.me/Movie_House_1"
     },
     "PORT": {
       "description": "Port to use for your webhooks",
@@ -79,7 +79,7 @@
     },
     "BMERNU_SCUT_SRELFTI": {
       "description": "please set this value as 0",
-      "value": "1",
+      "value": "0",
       "required": false
     }
   },
