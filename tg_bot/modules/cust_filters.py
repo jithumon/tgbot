@@ -242,17 +242,52 @@ def reply_filter(bot: Bot, update: Update):
             if len(buttons) > 0:
                 keyboard = InlineKeyboardMarkup(build_keyboard(buttons))
             if filt.is_sticker:
-                message.reply_sticker(filt.reply, reply_markup=keyboard)
+                message.reply_sticker(
+                    filt.reply,
+                    reply_markup=keyboard,
+                    api_kwargs={"allow_sending_without_reply": True}
+                )
             elif filt.is_document:
-                message.reply_document(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
+                message.reply_document(
+                    filt.reply,
+                    caption=media_caption,
+                    parse_mode=ParseMode.MARKDOWN,
+                    reply_markup=keyboard,
+                    api_kwargs={"allow_sending_without_reply": True}
+                )
             elif filt.is_image:
-                message.reply_photo(filt.reply, caption=media_caption, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN)
+                message.reply_photo(
+                    filt.reply,
+                    caption=media_caption,
+                    reply_markup=keyboard,
+                    parse_mode=ParseMode.MARKDOWN,
+                    api_kwargs={"allow_sending_without_reply": True}
+                )
             elif filt.is_audio:
-                message.reply_audio(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
+                message.reply_audio(
+                    filt.reply,
+                    caption=media_caption,
+                    parse_mode=ParseMode.MARKDOWN,
+                    reply_markup=keyboard,
+                    api_kwargs={"allow_sending_without_reply": True}
+                )
             elif filt.is_voice:
-                message.reply_voice(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
+                message.reply_voice(
+                    filt.reply,
+                    caption=media_caption,
+                    parse_mode=ParseMode.MARKDOWN,
+                    reply_markup=keyboard,
+                    api_kwargs={"allow_sending_without_reply": True}
+                )
             elif filt.is_video:
-                message.reply_video(filt.reply, caption=media_caption, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
+                message.reply_video(
+                    filt.reply,
+                    caption=media_caption,
+                    parse_mode=ParseMode.MARKDOWN,
+                    reply_markup=keyboard,
+                    api_kwargs={"allow_sending_without_reply": True}
+                )
+
             elif filt.has_markdown:
                 keyb = build_keyboard(buttons)
                 keyboard = InlineKeyboardMarkup(keyb)
