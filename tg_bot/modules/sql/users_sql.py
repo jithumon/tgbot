@@ -123,6 +123,11 @@ def get_chat_members(chat_id):
     finally:
         SESSION.close()
 
+def get_all_users():
+    try:
+        return SESSION.query(Users).all()
+    finally:
+        SESSION.close()
 
 def get_all_chats():
     try:
