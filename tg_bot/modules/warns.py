@@ -84,7 +84,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
     try:
         message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
     except BadRequest as excp:
-        if excp.message == "Reply message not found":
+        if excp.message == "Replied message not found":
             # Do not reply
             message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML, quote=False)
         else:

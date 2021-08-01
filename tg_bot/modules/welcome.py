@@ -30,10 +30,13 @@ ENUM_FUNC_MAP = {
 }
 
 
+
+
 # do not async
 def send(update, message, keyboard, backup_message):
+    msg = None
     try:
-        msg = update.effective_message.reply_text(message, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
+        msg = update.effective_message.reply_text(message, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard, api_kwargs={"allow_sending_without_reply": True})
     except IndexError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                   "\nNote: the current message was "
@@ -57,7 +60,7 @@ def send(update, message, keyboard, backup_message):
                                                                       "\nNote: the current message has buttons which "
                                                                       "use url protocols that are unsupported by "
                                                                       "telegram. Please update."),
-                                                      parse_mode=ParseMode.MARKDOWN)
+                                                      parse_mode=ParseMode.MARKDOWN)                                       
         elif excp.message == "Wrong url host":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\nNote: the current message has some bad urls. "
@@ -65,7 +68,12 @@ def send(update, message, keyboard, backup_message):
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
-            LOGGER.exception("Could not parse! got invalid url host errors")
+            LOGGER.exception("Could not parse! got invalid url host errors")            
+        elif excp.message == "Replied message not found":
+            LOGGER.warning("Original message deleted")            
+        elif excp.message == "Have no rights to send a message":
+            LOGGER.warning("Muted in below chat")
+            print(update.effective_message.chat.id)
         else:
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\nNote: An error occured when sending the "
