@@ -28,6 +28,7 @@ PM_START_TEXT = """
 Hi {}, my name is {}! This is a cool admin boat I run managing EDELMIRAZ Group.
 
 Just do not waste time from here!
+
 Thank you.
 
 """
