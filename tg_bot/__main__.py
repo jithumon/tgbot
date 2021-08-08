@@ -19,13 +19,13 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
 
-ഹായ് {}, എന്റെ പേര് {}! 
+ഹായ് {firstt_name}, എന്റെ പേര് {bot.first_name}! 
 
 ഞാൻ EDELMIRAZ Group നോക്കി നടത്തുന്ന ഒരു അടിപൊളി അഡ്മിൻ ബോട്ടാണ്.
 
 വെറുതെ ഇവിടെ നിന്നും സമയം കളയണ്ട! എന്നെ വെറെ ഒരാൾക്കും ഉപയോഗിക്കാൻ പറ്റില്ല..!
 
-Hi {}, my name is {}! This is a cool admin boat I run managing EDELMIRAZ Group.
+Hi {first_name}, my name is {bot.first_name}! This is a cool admin boat I run managing EDELMIRAZ Group.
 
 Just do not waste time from here!
 
