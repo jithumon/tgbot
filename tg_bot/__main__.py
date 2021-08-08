@@ -19,7 +19,7 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
 
-ഹായ് {firstt_name}, എന്റെ പേര് {bot.first_name}! 
+ഹായ് {first_name}, എന്റെ പേര് {bot.first_name}! 
 
 ഞാൻ EDELMIRAZ Group നോക്കി നടത്തുന്ന ഒരു അടിപൊളി അഡ്മിൻ ബോട്ടാണ്.
 
