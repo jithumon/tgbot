@@ -60,8 +60,7 @@ def broadcast(bot: Bot, update: Update):
                 sleep(0.1)
             except TelegramError:
                 failed += 1
-                LOGGER.warning("Couldn't send broadcast to %s, group name %s", str(chat.chat_id), str(chat.chat_name))
-
+                LOGGER.warning("Couldn't send broadcast to %s, group name %s", str(chat.chat_id), str(chat.chat_name))                
         update.effective_message.reply_text("Broadcast complete. {} groups failed to receive the message, probably "
                                             "due to being kicked.".format(failed))
 
@@ -72,13 +71,17 @@ def userbroadcast(bot: Bot, update: Update):
     if len(to_send) >= 2:
         users = sql.get_all_users() or []
         failed = 0
+        success = 0
         for user in users:
             try:
                 bot.sendMessage(int(user.user_id), to_send[1])
+                success += 1
+                LOGGER.warning("Sent broadcast to %s, username %s, Count: %s", str(user.user_id), str(user.username), str(success))
                 sleep(0.5)
             except TelegramError:
                 failed += 1
-                LOGGER.warning("Couldn't send broadcast to %s, username %s", str(user.user_id), str(user.username))
+                # LOGGER.warning("Couldn't send broadcast to %s, username %s", str(user.user_id), str(user.username))
+
 
         update.effective_message.reply_text("Broadcast complete. {} users failed to receive the message, probably "
                                             "due to being stopped.".format(failed))

@@ -179,7 +179,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
         return log
 
     except BadRequest as excp:
-        if excp.message == "Reply message not found":
+        if excp.message == "Replied message not found":
             # Do not reply
             message.reply_text("Banned! User will be banned for {}.".format(time_val), quote=False)
             return log
