@@ -81,10 +81,7 @@ def userbroadcast(bot: Bot, update: Update):
             except TelegramError:
                 failed += 1
                 # LOGGER.warning("Couldn't send broadcast to %s, username %s", str(user.user_id), str(user.username))
-
-
-        update.effective_message.reply_text("Broadcast complete. {} users failed to receive the message, probably "
-                                            "due to being stopped.".format(failed))
+        update.effective_message.reply_text("Broadcast complete.\n{} users failed\n{} users received".format(failed, success))
 
 
 
