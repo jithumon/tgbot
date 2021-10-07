@@ -4,16 +4,16 @@ A modular telegram Python bot running on python3 with an sqlalchemy database.
 Originally a simple group management bot with multiple admin features, it has evolved, becoming extremely modular and 
 simple to use.
 
-Can be found on telegram as [കൊച്ചുമുതലാളി](https://t.me/kochubot).
+Can be found on telegram as [റഫറി](http://t.me/Reffree_Bot).
 
-Kochu and I are moderating a [support group](https://t.me/Keralabots), where you can ask for help setting up your
+Kochu and I are moderating a [support group](https://t.me/NaseefChat), where you can ask for help setting up your
 bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. Of course
 I'll also help when a database schema changes, and some table column needs to be modified/added. Note to maintainers that all schema changes will be found in the commit messages, and its their responsibility to read any new commits.
 
-Join the [news channel](https://t.me/KochuUpdates) if you just want to stay in the loop about new features or
+Join the [news channel](https://t.me/NaseefKl) if you just want to stay in the loop about new features or
 announcements.
 
-Alternatively, [find me on telegram](https://t.me/jithumon)! (Keep all support questions in the support chat, where more people can help you.)
+Alternatively, [find me on telegram](https://t.me/NaseefKI)! (Keep all support questions in the support chat, where more people can help you.)
 
 To deploy me on heroku, use below button:
 
