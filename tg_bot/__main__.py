@@ -55,6 +55,16 @@ motivate him to make me even better. All the donation money will go to a better 
 (see his bio!). He's just a poor student, so every little helps!
 There are two ways of paying him; [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
 
+bot_full_name = dispatcher.bot.first_name + dispatcher.bot.last_name
+ABOUT_STRING = """**ABOUT OF {}**
+➠NAME : {}
+➠CREATOR : [This person](tg://user?id={})
+➠LANGUAGE : Python3
+➠LIBRARY : Python-telegram-bot
+➠SOURCE-CODE : [click here](https://github.com/jithumon/tgbot)
+➠UPDATES : @kochuUpdates
+""".format(dispatcher.bot.first_name, bot_full_name, OWNER_ID)
+
 IMPORTED = {}
 MIGRATEABLE = []
 HELPABLE = {}
@@ -124,6 +134,9 @@ def test(bot: Bot, update: Update):
     update.effective_message.reply_text("This person edited a message")
     print(update.effective_message)
 
+@run_async
+def about(bot: Bot, update: Update):
+     update.effective_message.reply_text(ABOUT_STRING)
 
 @run_async
 def start(bot: Bot, update: Update, args: List[str]):
@@ -150,7 +163,8 @@ def start(bot: Bot, update: Update, args: List[str]):
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
 
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="🎉 Add me to your group", url="t.me/{}?startgroup=true".format(bot.username)),  InlineKeyboardButton(text="🤖 Make Own Admin Bot", url="https://youtu.be/W6CLKrehy6w")],
+                    [[InlineKeyboardButton(text="➕️ Add me to your group➕️", url="t.me/{}?startgroup=true".format(bot.username))],
+                     [InlineKeyboardButton(text="😊 About", callbackdata="help_back"),  InlineKeyboardButton(text="🤖 Make Own Admin Bot", url="https://youtu.be/W6CLKrehy6w")],
                      [InlineKeyboardButton(text="👥 Support Group", url="https://t.me/KeralaBots"), InlineKeyboardButton(text="🔔 Update Channel", url="https://t.me/KochuUpdates")],
                      [InlineKeyboardButton(text="🎬 Youtube Channel", url="https://www.youtube.com/stealthtechnogaming?sub_confirmation=1"), InlineKeyboardButton(text="🛠 Help", url="https://t.me/{}?start=help".format(bot.username)) ]]))
 
@@ -440,6 +454,7 @@ def kcfrsct_fnc(bot: Bot, update: Update):
 def main():
     test_handler = CommandHandler("test", test)
     start_handler = CommandHandler("start", start, pass_args=True)
+    about_handler = CommandHandler("about", about)
 
     help_handler = CommandHandler("help", get_help)
     help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_")
@@ -454,6 +469,7 @@ def main():
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(settings_handler)
+    dispatcher.add_handler(about_handler)
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(settings_callback_handler)
     dispatcher.add_handler(migrate_handler)
