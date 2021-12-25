@@ -55,6 +55,17 @@ motivate him to make me even better. All the donation money will go to a better 
 (see his bio!). He's just a poor student, so every little helps!
 There are two ways of paying him; [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
 
+bot_full_name = dispatcher.bot.first_name + dispatcher.bot.last_name
+ABOUT_STRING = """**ABOUT OF {}**
+➠NAME : {}
+➠CREATOR : [This person](tg://user?id={})
+➠LANGUAGE : Python3
+➠LIBRARY : Python-telegram-bot
+➠SOURCE-CODE : [click here](https://github.com/jithumon/tgbot)
+➠UPDATES : @kochuUpdates
+
+""".format(dispatcher.bot.first_name, bot_full_name, OWNER_ID)
+
 IMPORTED = {}
 MIGRATEABLE = []
 HELPABLE = {}
@@ -185,6 +196,10 @@ def error_callback(bot, update, error):
     except TelegramError:
         print(error)
         # handle all other telegram related errors
+
+@run_async
+def about(bot: Bot, update: Update):
+    update.effective_message.reply_text(ABOUT_STRING)
 
 
 @run_async
