@@ -2,6 +2,7 @@ from functools import wraps
 from typing import Optional
 
 from telegram import User, Chat, ChatMember, Update, Bot
+from telegram.error import BadRequest
 
 from tg_bot import DEL_CMDS, SUDO_USERS, WHITELIST_USERS
 
@@ -48,7 +49,10 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
         return True
 
     if not member:
-        member = chat.get_member(user_id)
+        try:
+            member = chat.get_member(user_id)
+        except BadRequest as e:
+            return
     return member.status in ('administrator', 'creator')
 
 

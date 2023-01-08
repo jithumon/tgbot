@@ -1,7 +1,7 @@
 from math import ceil
 from typing import List, Dict
 
-from telegram import Bot, ParseMode, ReplyKeyboardMarkup, KeyboardButton
+from telegram import Bot, ParseMode, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from telegram.error import TelegramError
 
 from tg_bot import dispatcher
@@ -9,6 +9,7 @@ from tg_bot import dispatcher
 from telegram.ext import CommandHandler, Filters, MessageHandler, CallbackQueryHandler
 
 import tg_bot.modules.sql.connection_sql as con_sql
+import telegram
 
 def keyboard(bot, update):
     user = update.effective_user  # type: Optional[User]
@@ -58,6 +59,16 @@ def keyboard(bot, update):
                                              [KeyboardButton(btn1)], 
                                              [KeyboardButton(btn2)],
                                              [KeyboardButton(btn3)]]))
+
+
+
+def rmkeyboard(bot, update):
+    reply_markup = telegram.ReplyKeyboardRemove()
+    update.effective_message.reply_text(text="Keyboard Removed", reply_markup=reply_markup
+    )
+
+RMKEYBOARD_HANDLER = CommandHandler("rmkeyboard", rmkeyboard)
+dispatcher.add_handler(RMKEYBOARD_HANDLER)
     
 
 KEYBOARD_HANDLER = CommandHandler(["keyboard"], keyboard)
