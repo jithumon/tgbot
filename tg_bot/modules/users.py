@@ -69,19 +69,25 @@ def broadcast(bot: Bot, update: Update):
 def userbroadcast(bot: Bot, update: Update):
     to_send = update.effective_message.text.split(None, 1)
     if len(to_send) >= 2:
-        users = sql.get_all_users() or []
-        failed = 0
-        success = 0
-        for user in users:
-            try:
-                bot.sendMessage(int(user.user_id), to_send[1])
-                success += 1
-                LOGGER.warning("Sent broadcast to %s, username %s, Count: %s", str(user.user_id), str(user.username), str(success))
-                sleep(0.5)
-            except TelegramError:
-                failed += 1
-                # LOGGER.warning("Couldn't send broadcast to %s, username %s", str(user.user_id), str(user.username))
-        update.effective_message.reply_text("Broadcast complete.\n{} users failed\n{} users received".format(failed, success))
+        offset = 0
+        batch_size = 1000
+        while True:
+            users = sql.get_all_users_batch(offset, batch_size)
+            if not users:
+                break
+            # users = sql.get_all_users() or []
+            failed = 0
+            success = 0
+            for user in users:
+                try:
+                    bot.sendMessage(int(user.user_id), to_send[1])
+                    success += 1
+                    LOGGER.warning("Sent broadcast to %s, username %s, Count: %s", str(user.user_id), str(user.username), str(success))
+                    sleep(0.5)
+                except TelegramError:
+                    failed += 1
+                    # LOGGER.warning("Couldn't send broadcast to %s, username %s", str(user.user_id), str(user.username))
+            update.effective_message.reply_text("Broadcast complete.\n{} users failed\n{} users received".format(failed, success))
 
 
 

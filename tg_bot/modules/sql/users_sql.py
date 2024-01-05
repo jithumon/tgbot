@@ -129,6 +129,12 @@ def get_all_users():
     finally:
         SESSION.close()
 
+def get_all_users_batch(offset, batch_size):
+  try:
+      return SESSION.query(Users).offset(offset).limit(batch_size).all()
+  finally:
+      SESSION.close()
+
 def get_all_chats():
     try:
         return SESSION.query(Chats).all()
