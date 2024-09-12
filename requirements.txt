@@ -13,7 +13,7 @@ emoji==0.6.0
 feedparser==5.2.1
 Flask==1.1.2
 future==0.18.2
-idna==2.8
+idna==3.7
 itsdangerous==1.1.0
 Jinja2==2.11.2
 language-selector==0.1
