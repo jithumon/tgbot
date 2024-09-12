@@ -42,5 +42,5 @@ Telethon==1.16.4
 toml==0.10.2
 ubuntu-pro-client==8001
 ufw==0.36
-urllib3==1.25.8
+urllib3==1.26.19
 Werkzeug==1.0.1
