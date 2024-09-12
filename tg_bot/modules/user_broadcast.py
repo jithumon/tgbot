@@ -49,6 +49,10 @@ def userbroadcast(bot: Bot, update: Update):
                 )
                 sleep(0.5)
             except TelegramError as e:
+                if e == "Timed out":
+                    LOGGER.warning("Timed out, sleeping for 600 seconds")
+                    sleep(600)
+                    continue
                 failed += 1
                 LOGGER.warning(
                     "Failed to send broadcast to %s, Count: %s, Error: %s",
