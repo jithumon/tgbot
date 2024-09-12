@@ -43,4 +43,4 @@ toml==0.10.2
 ubuntu-pro-client==8001
 ufw==0.36
 urllib3==1.25.8
-Werkzeug==1.0.1
+Werkzeug==3.0.3
