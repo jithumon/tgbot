@@ -12,7 +12,7 @@ class Config(object):
     # REQUIRED
     API_KEY = "29876662"
     OWNER_ID = "6508378183"  # If you dont know, run the bot and do /id in your private chat with it
-    OWNER_USERNAME = "@chamika1120"
+    OWNER_USERNAME = "chamika1120"
 
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = 'mongodb+srv://chamiudith:<chamiudith>@chamika.inv4i.mongodb.net/?retryWrites=true&w=majority&appName=Chamika'  # needed for any database modules
