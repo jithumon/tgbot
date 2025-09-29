@@ -1,0 +1,28 @@
+services:
+  - type: worker
+    name: telegram-bot
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 -m tg_bot"
+    envVars:
+      - key: ENV
+        value: True
+      - key: TOKEN
+        sync: false
+      - key: OWNER_ID
+        sync: false
+      - key: OWNER_USERNAME
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: telegram-bot-db
+          property: connectionString
+      - key: WEBHOOK
+        value: False
+
+databases:
+  - name: telegram-bot-db
+    plan: free
+    databaseName: telegram_bot
+    user: telegram_bot_user

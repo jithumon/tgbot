@@ -23,6 +23,13 @@ announcements.
 Alternatively, [find me on telegram](https://t.me/jithumon)! (Keep all support questions in the support chat, where more people can help you.)
 
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jithumon/tgbot)
+
+After deploying to Render, you will need to set the following environment variables in the Render dashboard:
+- `TOKEN`: Your bot token.
+- `OWNER_ID`: Your Telegram user ID.
+- `OWNER_USERNAME`: Your Telegram username.
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jithumon/tgbot)<br>
 There is also a [tutorial video](https://youtu.be/W6CLKrehy6w) if you want any help on creating heroku clone.
 [![telegram badge](https://img.shields.io/badge/Support-Group-30302f?style=flat&logo=telegram)](https://telegram.dog/ELSupport)
@@ -70,7 +77,7 @@ class Development(Config):
     NO_LOAD = ['translation']
 ```
 
-If you can't have a config.py file (EG on heroku), it is also possible to use environment variables.
+If you can't have a config.py file (EG on heroku or render), it is also possible to use environment variables.
 The following env variables are supported:
  - `ENV`: Setting this to ANYTHING will enable env variables
 
