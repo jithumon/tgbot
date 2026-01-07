@@ -29,7 +29,7 @@ class Connection(BASE):
 
 
 class ConnectionHistory(BASE):
-    __tablename__ = "connection_history5"
+    __tablename__ = "connection_history"
     user_id = Column(BigInteger, primary_key=True)
     chat_id1 = Column(String(14))
     chat_id2 = Column(String(14))
